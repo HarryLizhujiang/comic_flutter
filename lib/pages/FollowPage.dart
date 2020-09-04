@@ -50,11 +50,15 @@ class _FollowPage extends State<FollowPage> {
           json.decode(StorageUtil().getJSON(COMIC_ID));
       favorite.forEach((key, value) {
         setState(() {
+          print(value);
+          print("massage");
+
           comiclist.add(DComic.fromJson(value));
         });
       });
     } catch (e) {
       print(e);
+      print("object");
       _refreshController.refreshFailed();
     }
     _refreshController.refreshCompleted();
@@ -64,24 +68,27 @@ class _FollowPage extends State<FollowPage> {
   Widget build(BuildContext context) {
     if (comiclist.length == 0) {
       return Scaffold(
-        appBar: AppBar(
-          title: Text("书架"),
-          centerTitle: true,
-          automaticallyImplyLeading: false,
-          actions: <Widget>[
-            IconButton(
-              icon: Icon(Icons.search),
-              tooltip: "搜索",
-              onPressed: () {
-                showSearch(context: context, delegate: CustomSearchDelegate());
-              },
-            )
-          ],
-        ),
-        body: Center(
-          child: Text("你还没有关注的漫画哟！"),
-        ),
-      );
+          appBar: AppBar(
+            title: Text("书架"),
+            centerTitle: true,
+            automaticallyImplyLeading: false,
+            actions: <Widget>[
+              IconButton(
+                icon: Icon(Icons.search),
+                tooltip: "搜索",
+                onPressed: () {
+                  showSearch(
+                      context: context, delegate: CustomSearchDelegate());
+                },
+              )
+            ],
+          ),
+          body: SmartRefresher(
+              controller: _refreshController,
+              onRefresh: _onRefresh,
+              child: Center(
+                child: Text("你还没有关注的漫画哟！"),
+              )));
     } else {
       return Scaffold(
           appBar: AppBar(
@@ -115,72 +122,70 @@ class _FollowPage extends State<FollowPage> {
   DComic comic;
   buildCard(DComic comic) {
     comic = comic;
-    if (comiclist.length == 0) {
-      return Text(
-        "暂时还没有关注的主播开播哦。",
-        style: TextStyle(color: Colors.grey),
-      );
-    }
-    var width = MediaQuery.of(context).size.width;
-    return Row(
-      children: <Widget>[
-        Container(
-            margin: EdgeInsets.all(17),
-            child: Image.network(
-              comic.cover,
-              width: 150,
-            )),
-        Padding(padding: EdgeInsets.only(left: 16)),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text(
-              comic.name,
-              style: TextStyle(
-                fontSize: 25,
-                fontWeight: FontWeight.bold,
-                color: Color(0xFF333333),
-              ),
-            ),
-            Padding(padding: EdgeInsets.only(top: 10)),
-            Row(
-              children: <Widget>[
-                ClipOval(
-                  child: Image.network(
-                    comic.author.avatar,
-                    height: 30,
-                    width: 30,
-                  ),
+    return GestureDetector(
+      child: Row(
+        children: <Widget>[
+          Container(
+              margin: EdgeInsets.all(17),
+              child: Image.network(
+                comic.cover,
+                width: 150,
+              )),
+          Padding(padding: EdgeInsets.only(left: 16)),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text(
+                comic.name,
+                style: TextStyle(
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFF333333),
                 ),
-                Padding(padding: EdgeInsets.only(left: 5)),
-                Text(
-                  comic.author.name,
-                  style: TextStyle(
-                    fontSize: 15,
-                    color: Color(0xFF999999),
+              ),
+              Padding(padding: EdgeInsets.only(top: 10)),
+              Row(
+                children: <Widget>[
+                  ClipOval(
+                    child: Image.network(
+                      comic.author.avatar,
+                      height: 30,
+                      width: 30,
+                    ),
                   ),
+                  Padding(padding: EdgeInsets.only(left: 5)),
+                  Text(
+                    comic.author.name,
+                    style: TextStyle(
+                      fontSize: 15,
+                      color: Color(0xFF999999),
+                    ),
+                  ),
+                ],
+              ),
+              Padding(padding: EdgeInsets.only(top: 2)),
+              Text(
+                comic.shortDescription,
+                style: TextStyle(
+                  fontSize: 15,
+                  color: Color(0xFF999999),
                 ),
-              ],
-            ),
-            Padding(padding: EdgeInsets.only(top: 2)),
-            Text(
-              comic.shortDescription,
-              style: TextStyle(
-                fontSize: 15,
-                color: Color(0xFF999999),
               ),
-            ),
-            Padding(padding: EdgeInsets.only(top: 2)),
-            Text(
-              '更新时间：' + getUpdataTiem(comic.lastUpdateTime),
-              style: TextStyle(
-                fontSize: 15,
-                color: Color(0xFF999999),
+              Padding(padding: EdgeInsets.only(top: 2)),
+              Text(
+                '更新时间：' + getUpdataTiem(comic.lastUpdateTime),
+                style: TextStyle(
+                  fontSize: 15,
+                  color: Color(0xFF999999),
+                ),
               ),
-            ),
-          ],
-        ),
-      ],
+            ],
+          ),
+        ],
+      ),
+      onTap: () {
+        NavigatorUtil.goDetail(context, int.parse(comic.comicId));
+      },
     );
   }
 
