@@ -40,21 +40,22 @@ class _FollowPage extends State<FollowPage> {
 
   /// 下拉刷新
   void _onRefresh() async {
-    if (comiclist != null) {
-      comiclist = [];
-    }
+    comiclist = [];
     try {
       // 读取关注列表
       Map<String, dynamic> favorite =
           json.decode(StorageUtil().getJSON(COMIC_ID));
-      favorite.forEach((key, value) {
+      if (favorite.isEmpty) {
         setState(() {
-          print(value);
-          print("massage");
-
-          comiclist.add(DComic.fromJson(value));
+          comiclist = null;
         });
-      });
+      } else {
+        favorite.forEach((key, value) {
+          setState(() {
+            comiclist.add(DComic.fromJson(value));
+          });
+        });
+      }
     } catch (e) {
       print(e);
       print("object");
@@ -65,7 +66,7 @@ class _FollowPage extends State<FollowPage> {
 
   @override
   Widget build(BuildContext context) {
-    if (comiclist.length == 0) {
+    if (comiclist == null) {
       return Scaffold(
           appBar: AppBar(
             title: Text("书架"),

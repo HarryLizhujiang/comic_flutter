@@ -39,14 +39,6 @@ class _About extends State<About> {
                   )),
               Container(
                 margin: EdgeInsets.all(10),
-                child: Text('开发时间：2个月', style: TextStyle(fontSize: 18)),
-              ),
-              Container(
-                margin: EdgeInsets.all(10),
-                child: Text('开发人员：独立完成', style: TextStyle(fontSize: 18)),
-              ),
-              Container(
-                margin: EdgeInsets.all(10),
                 child: Text('相关技术请移步Github', style: TextStyle(fontSize: 18)),
               ),
               Row(
