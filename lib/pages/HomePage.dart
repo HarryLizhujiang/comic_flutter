@@ -1,25 +1,25 @@
 import 'package:comic_flutter/pages/HistoryPage.dart';
-import 'package:comic_flutter/router/Navigator_util.dart';
+import 'package:comic_flutter/pages/about.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'FollowPage.dart';
-import 'MyPage.dart';
 import 'Recommendation.dart';
 
-class HomePage extends StatefulWidget{
+class HomePage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
     return _HomePage();
   }
 }
-class _HomePage extends State<HomePage>{
+
+class _HomePage extends State<HomePage> {
   int _currentIndex = 0;
   List<Widget> _pageList = [
     Recommendation(),
     HistoryPage(),
     FollowPage(),
-    MyPage()
+    About()
   ];
   List<BottomNavigationBarItem> _barItem = [
     BottomNavigationBarItem(
@@ -28,7 +28,8 @@ class _HomePage extends State<HomePage>{
         ),
         title: Container()),
     BottomNavigationBarItem(icon: Icon(Icons.history), title: Container()),
-    BottomNavigationBarItem(icon: Icon(Icons.collections_bookmark), title: Container()),
+    BottomNavigationBarItem(
+        icon: Icon(Icons.collections_bookmark), title: Container()),
     BottomNavigationBarItem(icon: Icon(Icons.code), title: Container()),
   ];
 
@@ -40,7 +41,7 @@ class _HomePage extends State<HomePage>{
         children: this._pageList,
       ),
       bottomNavigationBar: BottomNavigationBar(
-        onTap: (int index){
+        onTap: (int index) {
           setState(() {
             this._currentIndex = index;
           });

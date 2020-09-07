@@ -3,7 +3,6 @@ import 'package:comic_flutter/http/Api.dart';
 import 'package:comic_flutter/model/ChapterList.dart';
 import 'package:comic_flutter/model/ComicPicture.dart';
 import 'package:comic_flutter/model/DComic.dart';
-import 'package:comic_flutter/router/Navigator_util.dart';
 import 'package:comic_flutter/utils/toast.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -93,7 +92,6 @@ class _Cantent extends State<ContentPage> {
         child: CircularProgressIndicator(),
       );
     }
-    // TODO: implement build
     return SmartRefresher(
       enablePullDown: false,
       enablePullUp: true,

@@ -9,7 +9,6 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 class ComicPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    // TODO: implement createState
     return _ComicPage();
   }
 }
@@ -22,7 +21,6 @@ class _ComicPage extends State<ComicPage> {
   @override
   void initState() {
     getData(pageNum);
-    // TODO: implement initState
     super.initState();
   }
 
@@ -75,7 +73,6 @@ class _ComicPage extends State<ComicPage> {
         child: CircularProgressIndicator(),
       );
     }
-    // TODO: implement build
     return SmartRefresher(
       enablePullDown: true,
       enablePullUp: true,

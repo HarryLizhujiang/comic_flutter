@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:comic_flutter/model/DComic.dart';
 import 'package:comic_flutter/router/Navigator_util.dart';
 import 'package:flutter/cupertino.dart';
