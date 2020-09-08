@@ -66,6 +66,14 @@ class _About extends State<About> {
               Container(
                 child: Text('声明：本项目只做个人学习研究之用，不得用于商业用途！',
                     style: TextStyle(fontSize: 18)),
+              ),
+              Container(
+                child: Text('温馨提示：如果您有什么好的建议可以到我的博客留言，也可以给我发邮箱哦！',
+                    style: TextStyle(fontSize: 18)),
+              ),
+              Container(
+                child: Text('作者邮箱：jackieli@lizhujiang.com',
+                    style: TextStyle(fontSize: 18)),
               )
             ],
           ),

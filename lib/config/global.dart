@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:comic_flutter/model/ComicHistory.dart';
 import 'package:comic_flutter/model/DComic.dart';
 import 'package:comic_flutter/router/routers.dart';
 import 'package:fluro/fluro.dart';
@@ -13,7 +14,6 @@ import 'package:flutter/services.dart';
 class Global {
   /// 是否第一次打开
   static bool isFirstOpen = false;
-
 
   /// init
   static Future init() async {
@@ -32,8 +32,11 @@ class Global {
     if (isFirstOpen) {
       StorageUtil().setBool(STORAGE_DEVICE_ALREADY_OPEN_KEY, true);
       //初始化空关注第一次打开
-      Map<String,DComic> list=new Map();
+      Map<String, DComic> list = new Map();
       StorageUtil().setJSON(COMIC_ID, json.encode(list));
+      //初始化空历史记录
+      Map<String, ComicHistory> HistoryList = new Map();
+      StorageUtil().setJSON(COMIC_HISTORYID, json.encode(HistoryList));
     }
     // android 状态栏为透明的沉浸
     if (Platform.isAndroid) {

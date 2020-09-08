@@ -131,6 +131,7 @@ class _ComicPage extends State<ComicPage> {
           ),
         ),
         Container(
+          margin: EdgeInsets.all(10),
           width: 150,
           alignment: Alignment.center,
           child: Text(

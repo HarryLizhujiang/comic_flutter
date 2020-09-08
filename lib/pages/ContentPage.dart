@@ -1,9 +1,14 @@
+import 'dart:convert';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:comic_flutter/http/Api.dart';
 import 'package:comic_flutter/model/ChapterList.dart';
+import 'package:comic_flutter/model/ComicHistory.dart';
 import 'package:comic_flutter/model/ComicPicture.dart';
 import 'package:comic_flutter/model/DComic.dart';
+import 'package:comic_flutter/utils/storage.dart';
 import 'package:comic_flutter/utils/toast.dart';
+import 'package:comic_flutter/values/storages.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -33,6 +38,23 @@ class _Cantent extends State<ContentPage> {
 
   @override
   void dispose() {
+    print(chapterList[index]);
+    ComicHistory comicHistory = new ComicHistory();
+    comicHistory.comicId = dComic.comicId;
+    comicHistory.comicName = dComic.name;
+    comicHistory.chapterId = chapterList[index].chapterId;
+    comicHistory.chapterName = chapterList[index].name;
+    comicHistory.cover = dComic.cover;
+    // 保存历史记录
+    var favoriteJson = StorageUtil().getJSON(COMIC_HISTORYID);
+    Map<String, dynamic> favorite;
+    if (favoriteJson != null) {
+      favorite = json.decode(favoriteJson);
+    } else {
+      favorite = Map<String, dynamic>();
+    }
+    favorite.addAll({comicHistory.comicId: comicHistory});
+    StorageUtil().setJSON(COMIC_HISTORYID, json.encode(favorite));
     String comicName = dComic.name;
     String chapterName = chapterList[index].name;
     print("漫画名称$comicName,章节名称$chapterName");
@@ -50,8 +72,6 @@ class _Cantent extends State<ContentPage> {
     API.getPicture(widget.chapterId).then((value) => {
           setState(() {
             imageList = value.pictureData.returnData.imageList;
-            Code = value.pictureData.stateCode;
-            print(Code);
           })
         });
   }
