@@ -58,7 +58,6 @@ class _FollowPage extends State<FollowPage> {
       }
     } catch (e) {
       print(e);
-      print("object");
       _refreshController.refreshFailed();
     }
     _refreshController.refreshCompleted();
