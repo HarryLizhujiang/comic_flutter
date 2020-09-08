@@ -38,7 +38,6 @@ class _Cantent extends State<ContentPage> {
 
   @override
   void dispose() {
-    print(chapterList[index]);
     ComicHistory comicHistory = new ComicHistory();
     comicHistory.comicId = dComic.comicId;
     comicHistory.comicName = dComic.name;
@@ -50,6 +49,11 @@ class _Cantent extends State<ContentPage> {
     Map<String, dynamic> favorite;
     if (favoriteJson != null) {
       favorite = json.decode(favoriteJson);
+      favorite.forEach((key, value) {
+        if (key == comicHistory.comicId) {
+          StorageUtil().remove(key);
+        }
+      });
     } else {
       favorite = Map<String, dynamic>();
     }

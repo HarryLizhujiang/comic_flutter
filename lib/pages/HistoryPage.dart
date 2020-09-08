@@ -34,7 +34,6 @@ class _CategoryPage extends State<HistoryPage> {
         });
       } else {
         favorite.forEach((key, value) {
-          print("object");
           setState(() {
             historyList.add(ComicHistory.fromJson(value));
           });
