@@ -35,6 +35,7 @@ class Global {
       Map<String, DComic> list = new Map();
       StorageUtil().setJSON(COMIC_ID, json.encode(list));
       //初始化空历史记录
+      // ignore: non_constant_identifier_names
       Map<String, ComicHistory> HistoryList = new Map();
       StorageUtil().setJSON(COMIC_HISTORYID, json.encode(HistoryList));
     }

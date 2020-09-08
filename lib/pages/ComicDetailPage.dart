@@ -13,9 +13,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:comic_flutter/utils/storage.dart';
 
+// ignore: must_be_immutable
 class ComicDetailPage extends StatefulWidget {
+  // ignore: non_constant_identifier_names
   int ComicId;
 
+  // ignore: non_constant_identifier_names
   ComicDetailPage({@required this.ComicId});
 
   @override
@@ -85,6 +88,7 @@ class _ComicDetailpage extends State<ComicDetailPage> {
     );
   }
 
+  // ignore: non_constant_identifier_names
   Widget DetailBody(DComic comic, bool isFavorite) {
     return CustomScrollView(
       slivers: <Widget>[
@@ -108,6 +112,7 @@ class _ComicDetailpage extends State<ComicDetailPage> {
   }
 }
 
+// ignore: must_be_immutable
 class FilmContent extends StatefulWidget {
   DComic comic;
   List<ChapterList> chapterList;
@@ -374,6 +379,7 @@ class _FilmContent extends State<FilmContent> {
   }
 
   // 漫画类型处理
+  // ignore: non_constant_identifier_names
   Widget ComicType() {
     List<Widget> list = [];
     Widget w;

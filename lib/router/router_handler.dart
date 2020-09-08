@@ -18,12 +18,15 @@ Handler HomePageHanderl = Handler(
   return HomePage();
 });
 // 详情页
+// ignore: non_constant_identifier_names
 Handler DetailHanderl = Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
+  // ignore: non_constant_identifier_names
   int ComicId = int.parse(params["comicid"].first);
   return ComicDetailPage(ComicId: ComicId);
 });
 // 内容
+// ignore: non_constant_identifier_names
 Handler ContentHanderl = Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
   int chapterId = int.parse(params["chapterid"].first);

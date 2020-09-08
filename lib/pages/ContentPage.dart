@@ -27,6 +27,7 @@ class _Cantent extends State<ContentPage> {
   List<ChapterList> chapterList;
   List<ImageList> imageList;
   DComic dComic;
+  // ignore: non_constant_identifier_names
   var Code;
   RefreshController _refreshController =
       RefreshController(initialRefresh: true);

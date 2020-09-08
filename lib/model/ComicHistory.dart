@@ -1,6 +1,3 @@
-import 'package:comic_flutter/model/ChapterList.dart';
-import 'package:comic_flutter/model/DComic.dart';
-
 class ComicHistory {
   String comicId;
   String comicName;

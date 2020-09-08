@@ -11,8 +11,10 @@ class API {
   // 漫画详情
   static String detailS = "/comic/detail_static_new";
   //章节图片
+  // ignore: non_constant_identifier_names
   static String ChapterS = "/comic/chapterNew";
   //搜索漫画
+  // ignore: non_constant_identifier_names
   static String SercheS = "/search/relative?inputText=鬼";
 
   // 漫画列表
@@ -23,6 +25,7 @@ class API {
   }
 
   // 漫画详情
+  // ignore: non_constant_identifier_names
   static Future<ComicDetail> getComicDetail(int ComicId) async {
     var jsonData = await HttpManager.getInstance()
         .get(detailS, params: {"comicid": ComicId});
@@ -30,12 +33,14 @@ class API {
   }
 
   // 漫画图片
+  // ignore: non_constant_identifier_names
   static Future<ComicPicture> getPicture(int ChapterId) async {
     var jsonData = await HttpManager.getInstance()
         .get(ChapterS, params: {"chapter_id": ChapterId});
     return ComicPicture.fromJson(jsonData);
   }
 
+  // ignore: non_constant_identifier_names
   static Future<Serche> getSerche(String Text) async {
     var jsonData = await HttpManager.getInstance()
         .get(SercheS, params: {"inputText": Text});

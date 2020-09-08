@@ -48,9 +48,11 @@ class ComicDetailData {
 }
 
 class ReturnData {
+  // ignore: non_constant_identifier_names
   DComic Dcomic;
   List<ChapterList> chapterList;
   List<OtherWorks> otherWorks;
+  // ignore: non_constant_identifier_names
   ReturnData({this.Dcomic, this.chapterList, this.otherWorks});
 
   ReturnData.fromJson(Map<String, dynamic> json) {
